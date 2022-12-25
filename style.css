@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#sketch-container {
+    display: grid;
+    height: 50vh;
+    width: 50vh;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    border: 3px solid black;
+}
+
+#sketch-container div {
+    border: 1px solid black;
+}
