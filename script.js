@@ -1,7 +1,7 @@
 const sketchContainer = document.querySelector('#sketch-container');
 
 //create dynamic sketch grid and assign class name to every div
-const createGridReference = (function createGrid(divTotal=16) {
+const createGridReference = (function createGrid (divTotal=16) {
     sketchContainer.style.gridTemplateColumns = `repeat(${divTotal}, 1fr)`;
     sketchContainer.style.gridTemplateRows = `repeat(${divTotal}, 1fr)`;
     divTotal *= divTotal;
@@ -18,11 +18,14 @@ const createGridReference = (function createGrid(divTotal=16) {
 const colorOnHover = document.getElementById('sketch-container').getElementsByClassName('color-on-hover');
 
 //add event listener to every div of a square that activates on hover
-const colorGridReference = (function colorGrid () {
+const colorGridReference = (function colorGrid (squareColorChoice=[0, 0, 255], colorType='static') {
     for (let i=0; i<colorOnHover.length; i++) {
         colorOnHover[i].addEventListener('mouseover', (e) => {
-            e.target.style.backgroundColor = 'blue';
-        });
+            if (colorType === 'random')
+                squareColorChoice = randomRGB();
+
+            e.target.style.backgroundColor = `rgb(${squareColorChoice[0]}, ${squareColorChoice[1]}, ${squareColorChoice[2]})`;
+    });
     }
     return colorGrid;
 })();
@@ -48,5 +51,35 @@ function setGridSize () {
     } while (!valid);
 
     createGridReference(gridSize);
-    colorGridReference();
+    colorGridReference('blue');
+}
+
+function setSquareColoring (squareColorChoice='blue') {
+    switch(squareColorChoice) {
+        case 'red':
+            colorGridReference([255, 0, 0]);
+            break;
+        case 'green':
+            colorGridReference([0, 255, 0]);
+            break;
+        case 'blue':
+            colorGridReference([0, 0, 255]);
+            break;
+        case 'random':
+            squareColorChoice = randomRGB();
+            colorGridReference(squareColorChoice, 'random');
+            break;
+    }
+}
+
+function randomRGB () {
+    let red = randomRgbNumber();
+    let green = randomRgbNumber();
+    let blue = randomRgbNumber();
+    
+    return [red, green, blue];
+}
+
+function randomRgbNumber () {
+    return Math.floor(Math.random() * 256);
 }

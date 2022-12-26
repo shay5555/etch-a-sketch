@@ -20,3 +20,12 @@ body {
 #sketch-container div {
     border: 1px solid black;
 }
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.buttons .grid-size {
+    margin-right: 25px;
+}
