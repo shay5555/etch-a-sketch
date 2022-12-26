@@ -12,6 +12,8 @@ body {
     display: grid;
     height: 50vh;
     width: 50vh;
+    min-height: 250px;
+    min-width: 250px;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
     border: 3px solid black;
