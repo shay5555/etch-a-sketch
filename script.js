@@ -1,6 +1,6 @@
 const sketchContainer = document.querySelector('#sketch-container');
 
-//create sketch grid and assign class name to all of them
+//create dynamic sketch grid and assign class name to every div
 const createGridReference = (function createGrid(divTotal=16) {
     sketchContainer.style.gridTemplateColumns = `repeat(${divTotal}, 1fr)`;
     sketchContainer.style.gridTemplateRows = `repeat(${divTotal}, 1fr)`;
@@ -30,7 +30,23 @@ const colorGridReference = (function colorGrid () {
 //set grid size by using prompt from the user
 function setGridSize () {
     sketchContainer.textContent = '';
-    let gridSize = prompt("Number of squares per side: ");
+
+    let gridSize = prompt("Number of squares per side (1-100): ");
+
+    //loop to check if user input is in range (1-100)
+    let valid = false;
+    do {
+    if (gridSize>100) {
+        gridSize = prompt("Too many squares, enter a number between 1-100: ");
+        continue;
+    } else if (gridSize<1) {
+        gridSize = prompt("Too low, enter a number between 0-100: ");
+        continue;
+    } else {
+        valid = true;
+    }
+    } while (!valid);
+
     createGridReference(gridSize);
     colorGridReference();
 }
